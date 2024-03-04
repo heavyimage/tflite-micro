@@ -157,6 +157,8 @@ COMMON_FLAGS := \
   -fmessage-length=0 \
   -DTF_LITE_STATIC_MEMORY \
   -DTF_LITE_DISABLE_X86_NEON \
+  -fno-inline-small-functions \
+  -fno-inline \
   $(CC_WARNINGS) \
   $(ADDITIONAL_DEFINES)
 
