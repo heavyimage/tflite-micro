@@ -25,11 +25,11 @@ limitations under the License.
 namespace tflite {
 
 uint32_t MicroProfiler::BeginEvent(const char* tag) {
-  if (num_events_ == kMaxEvents) {
+  if (num_events_ == 4096) {
     MicroPrintf(
         "MicroProfiler errored out because total number of events exceeded the "
         "maximum of %d.",
-        kMaxEvents);
+        4096);
     TFLITE_ASSERT_FALSE;
   }
 
@@ -40,7 +40,7 @@ uint32_t MicroProfiler::BeginEvent(const char* tag) {
 }
 
 void MicroProfiler::EndEvent(uint32_t event_handle) {
-  TFLITE_DCHECK(event_handle < kMaxEvents);
+  TFLITE_DCHECK(event_handle < 4096);
   end_ticks_[event_handle] = GetCurrentTimeTicks();
 }
 
