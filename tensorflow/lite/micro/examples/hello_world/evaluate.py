@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import sys
 import tensorflow as tf
 from absl import app
 from absl import flags
@@ -26,6 +27,8 @@ _USE_TFLITE_INTERPRETER = flags.DEFINE_bool(
     False,
     'Inference with the TF Lite interpreter instead of the TFLM interpreter',
 )
+
+MODEL_PATH = flags.DEFINE_string("model", None, "Model to evaluate inference on!")
 
 _PREFIX_PATH = resource_loader.get_path_to_datafile('')
 
@@ -117,7 +120,10 @@ def get_tflite_prediction(model_path, x_values):
 
 
 def main(_):
-  model_path = os.path.join(_PREFIX_PATH, 'models/hello_world_float.tflite')
+  if not MODEL_PATH.value:
+    print("Please specify a MODEL_PATH argument!")
+    sys.exit(1)
+  model_path = os.path.join(_PREFIX_PATH, MODEL_PATH.value)
 
   x_values = generate_random_float_input()
 
