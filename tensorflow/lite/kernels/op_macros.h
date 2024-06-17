@@ -17,17 +17,17 @@ limitations under the License.
 
 #include "tensorflow/lite/micro/micro_log.h"
 
-#if !defined(TF_LITE_MCU_DEBUG_LOG)
+//#if !defined(TF_LITE_MCU_DEBUG_LOG)
 #include <cstdlib>
 #define TFLITE_ABORT abort()
-#else
-inline void AbortImpl() {
-  MicroPrintf("HALTED");
-  while (1) {
-  }
-}
-#define TFLITE_ABORT AbortImpl();
-#endif
+//#else
+//inline void AbortImpl() {
+//  MicroPrintf("HALTED");
+//  while (1) {
+//  }
+//}
+//#define TFLITE_ABORT AbortImpl();
+//#endif
 
 #if defined(NDEBUG)
 #define TFLITE_ASSERT_FALSE (static_cast<void>(0))
